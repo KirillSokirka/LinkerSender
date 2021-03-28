@@ -4,7 +4,8 @@ from bot import bot
 
 
 def main():
-    bot.
+    bot.delete_webhook()
+    bot.polling(True)
 
 if __name__ == '__main__':
     main()
