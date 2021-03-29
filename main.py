@@ -1,4 +1,3 @@
-import config
 from bot import server
 
 import os
