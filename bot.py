@@ -35,10 +35,10 @@ def say_hello(message):
 
 @bot.message_handler(commands=['enter_channel'])
 def send_link(message):
-    bot.send_message(message.chat.id, 'Посилання на канал - ' + config.LinkToChannel)
-
+    link = bot.get_chat(config.ChannelName).invite_link
+    bot.send_message(message.chat.id, 'Посилання на канал - ' + link)
 
 @bot.message_handler(content_types=['text'])
 def post_to_channel(message):
-    chat_id = bot.get_chat(config.ChannelName)
-    bot.send_message(chat_id, message.text)
+    chat = bot.get_chat(config.ChannelName)
+    bot.send_message(chat.id, message.text)

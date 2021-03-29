@@ -1,4 +1,4 @@
-from bot import server
+from bot import server, bot
 
 import os
 
