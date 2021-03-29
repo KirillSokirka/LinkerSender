@@ -1,11 +1,10 @@
 import config
+from bot import server
 
-from bot import bot
-
+import os
 
 def main():
-    bot.delete_webhook()
-    bot.polling(True)
+    server.run(host="0.0.0.0", port=int(os.environ.get('PORT', 5000)))
 
 if __name__ == '__main__':
     main()
