@@ -1,4 +1,4 @@
 
 Token = '1482873603:AAEQpbX5FTxkZBu_QZwfVU0k--5MM8BJhwg'
 
-HelloSticker = "linker_sender/AnimatedSticker.tgs"
+HelloSticker = "AnimatedSticker.tgs"
