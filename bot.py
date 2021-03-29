@@ -18,7 +18,7 @@ def get_message():
 @server.route("/")
 def webhook():
     bot.remove_webhook()
-    bot.set_webhook(url='https://your_heroku_project.com/' + config.Token)
+    bot.set_webhook(url='https://linkersender.herokuapp.com/' + config.Token)
     return "!", 200
 
 @bot.message_handler(commands = ['start'])
