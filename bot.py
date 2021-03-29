@@ -36,6 +36,6 @@ def send_link(message):
 
 @bot.message_handler(content_types=['text'])
 def post_to_channel(message):
-    bot.send_message(config.ChannelName, message)
+    bot.send_message(config.ChannelName, message.text)
 
 
