@@ -1,4 +1,5 @@
 import config
+import gmail
 
 import telebot
 from telebot import types
@@ -41,4 +42,6 @@ def send_link(message):
 @bot.message_handler(content_types=['text'])
 def post_to_channel(message):
     chat = bot.get_chat(config.ChannelName)
-    bot.send_message(chat.id, message.text)
+    mail = gmail.MailWorker()
+    text = mail.get_message
+    bot.send_message(chat.id, text)
