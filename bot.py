@@ -1,5 +1,5 @@
 import config
-import gmail
+from gmail import MailWorker
 
 import telebot
 from telebot import types
@@ -14,7 +14,7 @@ def get_message():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
     bot.process_new_updates([update])
-    return "!", 200
+    return 'google-site-verification: googleb91ad6aafd09f2b5.html', 200
 
 
 @server.route("/")
@@ -42,6 +42,6 @@ def send_link(message):
 @bot.message_handler(content_types=['text'])
 def post_to_channel(message):
     chat = bot.get_chat(config.ChannelName)
-    mail = gmail.MailWorker()
-    text = mail.get_message
+    gmail = MailWorker()
+    text = gmail.get_message()
     bot.send_message(chat.id, text)

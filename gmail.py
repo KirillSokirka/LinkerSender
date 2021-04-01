@@ -27,31 +27,31 @@ class MailWorker:
                 token.write(creds.to_json())
         self.service = build('gmail', 'v1', credentials=creds)
 
-    @property
     def get_message(self) -> str:
 
-       result = self.service.users().messages().list(maxResults=1, userId='me', labelIds=['UNREAD', 'INBOX', 'CATEGORY_PERSONAL']).execute()
-       
-       message = result.get('messages')
-       text = self.service.users().messages().get(userId='me', id=message[0]['id']).execute()
-       try:
-           payload = text['payload']
-           headers = payload['headers']
-           subject = None
-           sender = None
-           for d in headers:
-               if d['name'] == 'Subject':
-                   subject = d['value']
-               if d['name'] == 'From':
-                   sender = d['value']
+        result = self.service.users().messages().list(maxResults=1, userId='me',
+                                                      labelIds=['UNREAD', 'INBOX', 'CATEGORY_PERSONAL']).execute()
 
-           data = payload['body']['data']
-           data = data.replace("-", "+").replace("_", "/")
-           decoded_data = base64.urlsafe_b64decode(data).decode('utf-8')
-           if subject and sender is not None:
+        message = result.get('messages')
+        text = self.service.users().messages().get(userId='me', id=message[0]['id']).execute()
+        try:
+            payload = text['payload']
+            headers = payload['headers']
+            subject = None
+            sender = None
+            for d in headers:
+                if d['name'] == 'Subject':
+                    subject = d['value']
+                if d['name'] == 'From':
+                    sender = d['value']
+
+            data = payload['body']['data']
+            data = data.replace("-", "+").replace("_", "/")
+            decoded_data = base64.urlsafe_b64decode(data).decode('utf-8')
+            if subject and sender is not None:
                 return 'Subject: ' + subject + '\nFrom: ' + sender + 'Message: ' + decoded_data
-           else:
-               return 'From: ' + sender + '\nMessage: ' + decoded_data
+            else:
+                return 'From: ' + str(sender) + '\nMessage: ' + decoded_data
 
-       except:
-           pass
+        except:
+            pass
