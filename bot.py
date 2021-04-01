@@ -14,7 +14,7 @@ def get_message():
     json_string = request.get_data().decode('utf-8')
     update = types.Update.de_json(json_string)
     bot.process_new_updates([update])
-    return 'google-site-verification: googleb91ad6aafd09f2b5.html', 200
+    return '2', 200
 
 
 @server.route("/")
